@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:financially/pages/dashboard.dart';
+import 'package:financially/pages/portfolio.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,30 +12,28 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.pink,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: Scaffold(
+        body: Navigation(),
+      ),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
+class Navigation extends StatefulWidget {
+  Navigation({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<Navigation> createState() => _NavigationState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _NavigationState extends State<Navigation> {
   int _selectedIndex = 0;
-  static const List<Widget> _widgetOptions = <Widget>[
-    Icon(Icons.dashboard_rounded, size: 200.0,),
-    Icon(Icons.explore_rounded, size: 200.0,),
-  ];
+  final List<Widget> pages = <Widget>[Dashboard(), Portfolio()];
+
   void _onItemTap(int index) {
     setState(() => _selectedIndex = index);
   }
@@ -44,9 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: _selectedIndex == 0 ? Text('Dashboard') : Text('Portfolio'),
       ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+      body: pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -55,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.explore_rounded),
-            label: 'Porfolio',
+            label: 'Portfolio',
           ),
         ],
         currentIndex: _selectedIndex,
