@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "129720749596",
+    "project_id": "financially-f96bb",
+    "storage_bucket": "financially-f96bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:129720749596:android:dee0cc8cac55fc07cd99d9",
+        "android_client_info": {
+          "package_name": "com.example.financially"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "129720749596-302sasj7afmap60a3d7tb2hnd4mqegdu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0nNoT5zOnDjQhcqIFPPP9iuBIP4mdYcs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "129720749596-302sasj7afmap60a3d7tb2hnd4mqegdu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "129720749596-mu53445daum8phsjmr54n3r5ngnsh9gf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.financially"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

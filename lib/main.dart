@@ -1,63 +1,54 @@
 import 'package:flutter/material.dart';
-import 'package:financially/pages/dashboard.dart';
-import 'package:financially/pages/portfolio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:financially/firebase_options.dart';
+import 'package:financially/pages/authPage.dart';
+import 'package:financially/pages/mainPage.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.pink,
       ),
-      home: Scaffold(
-        body: Navigation(),
-      ),
+      home: root(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class Navigation extends StatefulWidget {
-  Navigation({super.key});
-
-  @override
-  State<Navigation> createState() => _NavigationState();
-}
-
-class _NavigationState extends State<Navigation> {
-  int _selectedIndex = 0;
-  final List<Widget> pages = <Widget>[Dashboard(), Portfolio()];
-
-  void _onItemTap(int index) {
-    setState(() => _selectedIndex = index);
-  }
+class root extends StatelessWidget {
+  const root({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: _selectedIndex == 0 ? Text('Dashboard') : Text('Portfolio'),
-      ),
-      body: pages[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard_rounded),
-            label: 'Dashboard',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.explore_rounded),
-            label: 'Portfolio',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTap,
+      body: FutureBuilder(
+        future: Firebase.initializeApp(
+          options: DefaultFirebaseOptions.currentPlatform,
+        ),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.done:
+              FirebaseAuth.instance.signOut();
+              final user = FirebaseAuth.instance.currentUser;
+              // print(user);
+              if (user == null) {
+                return AuthPage();
+              } else {
+                return MainPage();
+              }
+            default:
+              return const Center(child: Text('Loading'));
+          }
+        },
       ),
     );
   }
