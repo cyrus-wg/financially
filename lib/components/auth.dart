@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
+import '../utils/showSnackBar.dart';
+
 class Auth extends StatefulWidget {
   String option;
   bool otp;
@@ -33,19 +35,6 @@ class _AuthState extends State<Auth> {
   FirebaseAuth auth = FirebaseAuth.instance;
   CollectionReference users = FirebaseFirestore.instance.collection('users');
   String _verificationId = '';
-  SnackBar showSnackBar(String msg) {
-    return SnackBar(
-      content: Text(
-        msg,
-        textAlign: TextAlign.center,
-        style: const TextStyle(
-          fontSize: 17,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      backgroundColor: Colors.pink,
-    );
-  }
 
   @override
   void dispose() {
