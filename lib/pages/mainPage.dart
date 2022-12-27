@@ -24,7 +24,7 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: const [
               Icon(Icons.account_balance_rounded),
               SizedBox(width: 10),
               Text(

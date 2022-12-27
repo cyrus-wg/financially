@@ -48,11 +48,11 @@ class _AuthState extends State<Auth> {
     return data.exists;
   }
 
-  void createWatchlist(String phone) async {
+  Future<void> createWatchlist(String phone) async {
     await users.doc(phone).set({'watchlist': []});
   }
 
-  void signup() async {
+  Future<void> signup() async {
     if (_phone.text.length < 8) {
       _phone.text = '';
       ScaffoldMessenger.of(context).showSnackBar(
@@ -65,11 +65,11 @@ class _AuthState extends State<Auth> {
       ScaffoldMessenger.of(context)
           .showSnackBar(showSnackBar('User already registered'));
     } else {
-      handleOtp();
+      await handleOtp();
     }
   }
 
-  void signin() async {
+  Future<void> signin() async {
     if (_phone.text.length < 8) {
       _phone.text = '';
       ScaffoldMessenger.of(context).showSnackBar(
@@ -82,17 +82,17 @@ class _AuthState extends State<Auth> {
       ScaffoldMessenger.of(context)
           .showSnackBar(showSnackBar('User not registered'));
     } else {
-      handleOtp();
+      await handleOtp();
     }
   }
 
-  void validateOtp(String verificationId) async {
+  Future<void> validateOtp(String verificationId) async {
     try {
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
           verificationId: verificationId, smsCode: _pin.text);
       await auth.signInWithCredential(credential);
       if (widget.option == 'signup') {
-        createWatchlist(_phone.text);
+        await createWatchlist('+852${_phone.text}');
       }
       final o = widget.option == 'signup' ? 'Sign up' : 'Sign in';
       ScaffoldMessenger.of(context)
@@ -112,13 +112,16 @@ class _AuthState extends State<Auth> {
     }
   }
 
-  void handleOtp() async {
+  Future<void> handleOtp() async {
     await auth.verifyPhoneNumber(
       phoneNumber: '+852 ${_phone.text}',
       timeout: Duration(minutes: 2),
       verificationCompleted: (PhoneAuthCredential credential) async {
         await auth.signInWithCredential(credential);
         final o = widget.option == 'signup' ? 'Sign up' : 'Sign in';
+        if (widget.option == 'signup') {
+          await createWatchlist('+852${_phone.text}');
+        }
         ScaffoldMessenger.of(context)
             .showSnackBar(showSnackBar('$o successfully'));
         Navigator.pushReplacement(
@@ -240,7 +243,7 @@ class _AuthState extends State<Auth> {
             ),
           ),
           TextButton(
-            onPressed: () {
+            onPressed: () async {
               if (widget.otp == false) {
                 setState(() {
                   widget.option =
@@ -248,7 +251,7 @@ class _AuthState extends State<Auth> {
                   _phone.text = '';
                 });
               } else {
-                handleOtp();
+                await handleOtp();
               }
             },
             child: Text(
@@ -266,13 +269,13 @@ class _AuthState extends State<Auth> {
           ),
           const SizedBox(height: 70),
           ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
               if (widget.otp == true) {
-                validateOtp(_verificationId);
+                await validateOtp(_verificationId);
               } else if (widget.option == 'signup') {
-                signup();
+                await signup();
               } else {
-                signin();
+                await signin();
               }
             },
             style: ElevatedButton.styleFrom(
