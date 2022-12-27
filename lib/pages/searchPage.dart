@@ -1,4 +1,5 @@
 import 'package:algolia_helper_flutter/algolia_helper_flutter.dart';
+import 'package:financially/components/searchCard.dart';
 import 'package:financially/models/stock.dart';
 import 'package:financially/utils/hitPage.dart';
 import 'package:financially/utils/searchMetadata.dart';
@@ -110,15 +111,8 @@ class _SearchPageState extends State<SearchPage> {
                 child: Text('No results found'),
               ),
           itemBuilder: (_, item, __) => Container(
-                color: Colors.white,
-                height: 80,
-                padding: const EdgeInsets.all(8),
-                child: Row(
-                  children: [
-                    SizedBox(width: 50, child: Text(item.ticker)),
-                    const SizedBox(width: 20),
-                    Expanded(child: Text('${item.name} + ${item.marked}'))
-                  ],
-                ),
+                height: 100,
+                padding: const EdgeInsets.all(4),
+                child: SearchCard(name: item.name, ticker: item.ticker),
               )));
 }
