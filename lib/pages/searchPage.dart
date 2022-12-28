@@ -7,8 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class SearchPage extends StatefulWidget {
-  final bool pressable;
-  const SearchPage({super.key, this.pressable = true});
+  const SearchPage({super.key});
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -57,51 +56,53 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Container(
-            width: MediaQuery.of(context).size.width * .7,
-            height: kToolbarHeight * 0.8,
-            decoration: BoxDecoration(
-              color: Colors.white70,
-              borderRadius: BorderRadius.circular(20),
+      appBar: AppBar(
+        title: Container(
+          width: MediaQuery.of(context).size.width * .7,
+          height: kToolbarHeight * 0.8,
+          decoration: BoxDecoration(
+            color: Colors.white70,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: TextField(
+            autofocus: true,
+            controller: _searchTextController,
+            autocorrect: false,
+            enableSuggestions: false,
+            decoration: const InputDecoration(
+              border: InputBorder.none,
+              hintText: 'Enter ticker or keyword',
+              prefixIcon: Icon(Icons.search_rounded),
             ),
-            child: TextField(
-              controller: _searchTextController,
-              autocorrect: false,
-              enableSuggestions: false,
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-                hintText: 'Enter ticker or keyword',
-                prefixIcon: Icon(Icons.search_rounded),
-              ),
-              style: const TextStyle(
-                color: Colors.pink,
-                fontSize: 19,
-                fontWeight: FontWeight.bold,
-              ),
+            style: const TextStyle(
+              color: Colors.pink,
+              fontSize: 19,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              StreamBuilder<SearchMetadata>(
-                stream: _searchMetadata,
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return const SizedBox.shrink();
-                  }
-                  return Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Text('${snapshot.data!.nbHits} results'),
-                  );
-                },
-              ),
-              Expanded(child: _hits(context)),
-            ],
-          ),
-        ));
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            StreamBuilder<SearchMetadata>(
+              stream: _searchMetadata,
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const SizedBox.shrink();
+                }
+                return Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Text('${snapshot.data!.nbHits} results'),
+                );
+              },
+            ),
+            Expanded(child: _hits(context)),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _hits(BuildContext context) => PagedListView<int, Stock>(

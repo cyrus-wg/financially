@@ -1,18 +1,14 @@
+import 'package:financially/pages/stockPage.dart';
 import 'package:financially/utils/marked.dart';
 import 'package:flutter/material.dart';
 
 // TODO: direct to specific stock page
 
 class SearchCard extends StatefulWidget {
-  final bool pressable;
   final String name;
   final String ticker;
   late bool marked;
-  SearchCard(
-      {super.key,
-      required this.name,
-      required this.ticker,
-      this.pressable = true});
+  SearchCard({super.key, required this.name, required this.ticker});
 
   @override
   State<SearchCard> createState() => _SearchCardState();
@@ -20,11 +16,7 @@ class SearchCard extends StatefulWidget {
 
 class _SearchCardState extends State<SearchCard> {
   Future togglemark() async {
-    if (!widget.marked) {
-      await mark(widget.ticker);
-    } else {
-      await unmark(widget.ticker);
-    }
+    await switchMarked(widget.ticker, widget.marked);
     setState(() {
       widget.marked = !widget.marked;
     });
@@ -55,10 +47,16 @@ class _SearchCardState extends State<SearchCard> {
           ),
           child: InkWell(
             splashColor: Colors.pinkAccent,
-            onTap: () {
-              if (widget.pressable) {
-                print('pressable');
-              }
+            onTap: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => StockPage(
+                    ticker: widget.ticker,
+                  ),
+                ),
+              );
+              setState(() {});
             },
             child: Center(
               child: ListTile(

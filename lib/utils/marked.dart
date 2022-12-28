@@ -13,20 +13,17 @@ Future<bool> marked(String ticker) async {
   return contained;
 }
 
-Future<void> mark(String ticker) async {
+Future<void> switchMarked(String ticker, bool marked) async {
   final user = FirebaseAuth.instance.currentUser;
   final firestore =
       FirebaseFirestore.instance.collection('users').doc(user?.phoneNumber);
-  await firestore.update({
-    'watchlist': FieldValue.arrayUnion([ticker])
-  });
-}
-
-Future<void> unmark(String ticker) async {
-  final user = FirebaseAuth.instance.currentUser;
-  final firestore =
-      FirebaseFirestore.instance.collection('users').doc(user?.phoneNumber);
-  await firestore.update({
-    'watchlist': FieldValue.arrayRemove([ticker])
-  });
+  if (!marked) {
+    await firestore.update({
+      'watchlist': FieldValue.arrayUnion([ticker])
+    });
+  } else {
+    await firestore.update({
+      'watchlist': FieldValue.arrayRemove([ticker])
+    });
+  }
 }
