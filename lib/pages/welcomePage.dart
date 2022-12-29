@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:financially/components/welcomeCard.dart';
 import 'package:financially/utils/getAllImgRef.dart';
+import 'package:financially/utils/showSnackBar.dart';
 import 'package:flutter/material.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -34,6 +35,8 @@ class _WelcomePageState extends State<WelcomePage> {
             tooltip: 'close',
             onPressed: () {
               context.router.replaceNamed('/');
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(showSnackBar('Welcome to Financially!'));
             },
           ),
         ],
@@ -126,6 +129,8 @@ class _WelcomePageState extends State<WelcomePage> {
       floatingActionButton: ElevatedButton(
         onPressed: () {
           context.router.replaceNamed('/');
+          ScaffoldMessenger.of(context)
+              .showSnackBar(showSnackBar('Welcome to Financially!'));
         },
         style: ElevatedButton.styleFrom(
           minimumSize: Size(MediaQuery.of(context).size.width * 0.8, 50),

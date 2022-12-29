@@ -91,15 +91,17 @@ class _AuthState extends State<Auth> {
           verificationId: verificationId, smsCode: _pin.text);
       await auth.signInWithCredential(credential);
       final o = widget.option == 'signup' ? 'signup' : 'signin';
-      ScaffoldMessenger.of(context)
-          .showSnackBar(showSnackBar('$o successfully'));
       if (o == 'signup') {
         await createWatchlist(_phone.text);
         context.router.popUntil((_) => false);
         context.router.pushNamed('/welcome');
+        ScaffoldMessenger.of(context)
+            .showSnackBar(showSnackBar('Sign up successfully'));
       } else {
         context.router.popUntil((_) => false);
         context.router.pushNamed('/');
+        ScaffoldMessenger.of(context)
+            .showSnackBar(showSnackBar('Sign in successfully'));
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-verification-code') {
@@ -119,13 +121,15 @@ class _AuthState extends State<Auth> {
       verificationCompleted: (PhoneAuthCredential credential) async {
         await auth.signInWithCredential(credential);
         final o = widget.option == 'signup' ? 'signup' : 'signin';
-        ScaffoldMessenger.of(context)
-            .showSnackBar(showSnackBar('$o successfully'));
         if (o == 'signup') {
           await createWatchlist(_phone.text);
           context.router.replaceNamed('/welcome');
+          ScaffoldMessenger.of(context)
+              .showSnackBar(showSnackBar('Sign up successfully'));
         } else {
           context.router.replaceNamed('/');
+          ScaffoldMessenger.of(context)
+              .showSnackBar(showSnackBar('Sign in successfully'));
         }
       },
       verificationFailed: (FirebaseAuthException e) {
