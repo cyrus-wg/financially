@@ -1,20 +1,17 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:financially/pages/authPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class Dashboard extends StatelessWidget {
+class Dashboard extends StatefulWidget {
+  const Dashboard({super.key});
+
+  @override
+  State<Dashboard> createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
-        child: Text('log out'),
-        onPressed: () async {
-          await FirebaseAuth.instance.signOut();
-          context.router.popUntil((_) => false);
-          context.router.pushNamed('/auth');
-        },
-      ),
-    );
+    return Container();
   }
 }

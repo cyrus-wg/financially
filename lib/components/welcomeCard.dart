@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class welcomeCard extends StatefulWidget {
   final String ticker;
-  late Uint8List image;
+  late final Uint8List image;
   welcomeCard({super.key, required this.ticker});
 
   @override

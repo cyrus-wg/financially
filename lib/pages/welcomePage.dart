@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:financially/components/welcomeCard.dart';
-import 'package:financially/utils/getAllImgRef.dart';
+import 'package:financially/utils/getAllImgName.dart';
 import 'package:financially/utils/showSnackBar.dart';
 import 'package:flutter/material.dart';
 
