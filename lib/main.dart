@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   final user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
-    print(user);
+    // print(user);
     return MaterialApp.router(
       theme: ThemeData(
         primarySwatch: Colors.pink,

@@ -1,5 +1,4 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:financially/components/hotStockRow.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatefulWidget {
@@ -12,6 +11,12 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: ListView(
+        children: [
+          HotStockRow(),
+        ],
+      ),
+    );
   }
 }

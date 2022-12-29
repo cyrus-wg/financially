@@ -110,7 +110,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         tickers.length,
                         (index) => Center(
                           child: Container(
-                              height: MediaQuery.of(context).size.width * 0.45,
+                              height: MediaQuery.of(context).size.width * 0.5,
                               width: MediaQuery.of(context).size.width * 0.4,
                               padding: const EdgeInsets.all(2),
                               child: ClipRRect(
