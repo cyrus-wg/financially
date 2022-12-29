@@ -1,10 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:financially/pages/mainPage.dart';
+import 'package:financially/utils/showSnackBar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
-
-import '../utils/showSnackBar.dart';
 
 class Auth extends StatefulWidget {
   String option;
@@ -44,12 +43,12 @@ class _AuthState extends State<Auth> {
   }
 
   Future<bool> findUser(String phone) async {
-    final data = await users.doc(phone).get();
+    final data = await users.doc('+852$phone').get();
     return data.exists;
   }
 
   Future<void> createWatchlist(String phone) async {
-    await users.doc(phone).set({'watchlist': []});
+    await users.doc('+852$phone').set({'watchlist': []});
   }
 
   Future<void> signup() async {
@@ -91,16 +90,17 @@ class _AuthState extends State<Auth> {
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
           verificationId: verificationId, smsCode: _pin.text);
       await auth.signInWithCredential(credential);
-      if (widget.option == 'signup') {
-        await createWatchlist('+852${_phone.text}');
-      }
-      final o = widget.option == 'signup' ? 'Sign up' : 'Sign in';
+      final o = widget.option == 'signup' ? 'signup' : 'signin';
       ScaffoldMessenger.of(context)
           .showSnackBar(showSnackBar('$o successfully'));
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => MainPage()),
-      );
+      if (o == 'signup') {
+        await createWatchlist(_phone.text);
+        context.router.popUntil((_) => false);
+        context.router.pushNamed('/welcome');
+      } else {
+        context.router.popUntil((_) => false);
+        context.router.pushNamed('/');
+      }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-verification-code') {
         _pin.text = '';
@@ -118,16 +118,15 @@ class _AuthState extends State<Auth> {
       timeout: Duration(minutes: 2),
       verificationCompleted: (PhoneAuthCredential credential) async {
         await auth.signInWithCredential(credential);
-        final o = widget.option == 'signup' ? 'Sign up' : 'Sign in';
-        if (widget.option == 'signup') {
-          await createWatchlist('+852${_phone.text}');
-        }
+        final o = widget.option == 'signup' ? 'signup' : 'signin';
         ScaffoldMessenger.of(context)
             .showSnackBar(showSnackBar('$o successfully'));
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => MainPage()),
-        );
+        if (o == 'signup') {
+          await createWatchlist(_phone.text);
+          context.router.replaceNamed('/welcome');
+        } else {
+          context.router.replaceNamed('/');
+        }
       },
       verificationFailed: (FirebaseAuthException e) {
         print(e);
@@ -137,6 +136,8 @@ class _AuthState extends State<Auth> {
           widget.otp = true;
         });
         _verificationId = verificationId;
+        ScaffoldMessenger.of(context)
+            .showSnackBar(showSnackBar('Please input OTP!'));
       },
       codeAutoRetrievalTimeout: (String verificationId) {},
     );

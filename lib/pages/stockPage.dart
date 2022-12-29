@@ -1,8 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 class StockPage extends StatefulWidget {
-  final ticker;
-  const StockPage({super.key, required this.ticker});
+  final String ticker;
+  const StockPage({super.key, @PathParam('ticker') required this.ticker});
 
   @override
   State<StockPage> createState() => _StockPageState();

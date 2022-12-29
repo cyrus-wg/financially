@@ -1,11 +1,11 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:financially/components/auth.dart';
+import 'package:financially/router/router.gr.dart';
 import 'package:flutter/material.dart';
-
-import '../components/auth.dart';
 
 class AuthPage extends StatefulWidget {
   String currentPage;
-  bool otp;
-  AuthPage({super.key, this.currentPage = 'signup', this.otp = false});
+  AuthPage({super.key, this.currentPage = 'signin'});
 
   @override
   State<AuthPage> createState() => _AuthPageState();
@@ -53,10 +53,7 @@ class _AuthPageState extends State<AuthPage> {
               ),
             ],
           ),
-          Auth(
-            option: widget.currentPage,
-            otp: widget.otp,
-          ),
+          Auth(option: widget.currentPage),
         ],
       ),
       drawer: Drawer(
@@ -94,16 +91,9 @@ class _AuthPageState extends State<AuthPage> {
                 onTap: () {
                   setState(() {
                     widget.currentPage = 'signup';
-                    Navigator.pop(context);
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AuthPage(
-                                currentPage: widget.currentPage,
-                                otp: false,
-                              )),
-                    );
                   });
+                  context.router.popUntil((_) => false);
+                  context.router.push(AuthRoute(currentPage: 'signup'));
                 },
               ),
               const Divider(),
@@ -119,16 +109,9 @@ class _AuthPageState extends State<AuthPage> {
                 onTap: () {
                   setState(() {
                     widget.currentPage = 'signin';
-                    Navigator.pop(context);
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AuthPage(
-                                currentPage: widget.currentPage,
-                                otp: false,
-                              )),
-                    );
                   });
+                  context.router.popUntil((_) => false);
+                  context.router.push(AuthRoute(currentPage: 'signin'));
                 },
               ),
               const Divider(),

@@ -1,10 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../components/dashboard.dart';
 import '../components/portfolio.dart';
 
 class MainPage extends StatefulWidget {
-  MainPage({super.key});
+  const MainPage({super.key});
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -38,8 +39,14 @@ class _MainPageState extends State<MainPage> {
           ),
           actions: [
             IconButton(
-              icon: const Icon(Icons.search_rounded),
-              onPressed: () => {},
+              icon: const Icon(
+                Icons.search_rounded,
+                size: 30,
+              ),
+              onPressed: () async {
+                await context.router.pushNamed('/search');
+                setState(() {});
+              },
             )
           ]),
       body: pages[_selectedIndex],

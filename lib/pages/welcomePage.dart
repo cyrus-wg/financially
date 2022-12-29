@@ -1,6 +1,5 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:financially/components/welcomeCard.dart';
-import 'package:financially/pages/mainPage.dart';
-import 'package:financially/pages/searchPage.dart';
 import 'package:financially/utils/getAllImgRef.dart';
 import 'package:flutter/material.dart';
 
@@ -34,10 +33,7 @@ class _WelcomePageState extends State<WelcomePage> {
             ),
             tooltip: 'close',
             onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => MainPage()),
-              );
+              context.router.replaceNamed('/');
             },
           ),
         ],
@@ -68,11 +64,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           const SizedBox(height: 10),
                           InkWell(
                             onTap: (() async {
-                              await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SearchPage()),
-                              );
+                              await context.router.pushNamed('/search');
                               setState(() {});
                             }),
                             child: TextField(
@@ -133,24 +125,21 @@ class _WelcomePageState extends State<WelcomePage> {
           }),
       floatingActionButton: ElevatedButton(
         onPressed: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => MainPage()),
-          );
+          context.router.replaceNamed('/');
         },
-        child: Text(
-          'G O',
-          style: TextStyle(
-            color: Colors.white70,
-            fontSize: 30,
-          ),
-        ),
         style: ElevatedButton.styleFrom(
           minimumSize: Size(MediaQuery.of(context).size.width * 0.8, 50),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ),
           backgroundColor: Colors.pink.withOpacity(0.9),
+        ),
+        child: const Text(
+          'G O',
+          style: TextStyle(
+            color: Colors.white70,
+            fontSize: 30,
+          ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

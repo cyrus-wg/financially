@@ -1,8 +1,6 @@
-import 'package:financially/pages/stockPage.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:financially/utils/marked.dart';
 import 'package:flutter/material.dart';
-
-// TODO: direct to specific stock page
 
 class SearchCard extends StatefulWidget {
   final String name;
@@ -48,14 +46,7 @@ class _SearchCardState extends State<SearchCard> {
           child: InkWell(
             splashColor: Colors.pinkAccent,
             onTap: () async {
-              await Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => StockPage(
-                    ticker: widget.ticker,
-                  ),
-                ),
-              );
+              context.router.pushNamed('/stock/${widget.ticker}');
               setState(() {});
             },
             child: Center(
