@@ -38,12 +38,26 @@ class _HotStockCardState extends State<HotStockCard> {
           if (snapshot.hasData) {
             final data = snapshot.data;
             image = data!['image'];
-            price = double.parse(data['price']).toStringAsFixed(2);
-            pert = double.parse(data['percent_change']).toStringAsFixed(2);
-            value = double.parse(data['change']).toStringAsFixed(2);
-            price = price[0] != '-' ? '+$price' : price;
-            pert = pert[0] != '-' ? '+$pert%' : '$pert%';
-            value = value[0] != '-' ? '+$value' : value;
+            price = double.parse(data['price']).toStringAsFixed(3);
+            double pertd = double.parse(
+                double.parse(data['percent_change']).toStringAsFixed(2));
+            double valued =
+                double.parse(double.parse(data['change']).toStringAsFixed(2));
+            price = '\$$price';
+            if (pertd == 0) {
+              pert = '0.00%';
+            } else if (pertd > 0) {
+              pert = '+$pertd%';
+            } else {
+              pert = '$pertd%';
+            }
+            if (valued == 0) {
+              value = '\$0.00';
+            } else if (valued > 0) {
+              value = '+\$$valued';
+            } else {
+              value = '-\$${'$valued'.substring(1)}';
+            }
 
             return InkWell(
               onTap: () {
@@ -93,7 +107,9 @@ class _HotStockCardState extends State<HotStockCard> {
                               borderRadius: BorderRadius.circular(5),
                               color: pert[0] == '+'
                                   ? Colors.green.shade100
-                                  : Colors.red.shade100,
+                                  : pert[0] == '-'
+                                      ? Colors.red.shade100
+                                      : null,
                             ),
                             child: Text(
                               pert,
@@ -102,7 +118,9 @@ class _HotStockCardState extends State<HotStockCard> {
                                 fontWeight: FontWeight.w600,
                                 color: pert[0] == '+'
                                     ? Colors.green.shade600
-                                    : Colors.red.shade600,
+                                    : pert[0] == '-'
+                                        ? Colors.red.shade600
+                                        : Colors.grey.shade600,
                               ),
                             ),
                           ),
@@ -129,10 +147,12 @@ class _HotStockCardState extends State<HotStockCard> {
                 color: Colors.pink.shade50,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: SizedBox(
-                height: MediaQuery.of(context).size.width * 0.55,
-                width: MediaQuery.of(context).size.width * 0.45,
-                child: const CircularProgressIndicator(),
+              child: Center(
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.1,
+                  width: MediaQuery.of(context).size.width * 0.1,
+                  child: const CircularProgressIndicator(),
+                ),
               ),
             );
           }

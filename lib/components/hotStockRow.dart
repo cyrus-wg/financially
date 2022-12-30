@@ -33,37 +33,41 @@ class _HotStockRowState extends State<HotStockRow> {
           if (snapshot.hasData) {
             imgList = snapshot.data!;
             resetSelectedImg();
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(
-                    'Hot Stocks',
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.pink,
+            return Container(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      'Hot Stocks',
+                      style: TextStyle(
+                        fontSize: 35,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.pink,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.55 + 25,
-                  child: ListView.builder(
-                      itemCount: widget.cardNum,
-                      scrollDirection: Axis.horizontal,
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
-                      itemBuilder: (BuildContext context, int index) {
-                        return UnconstrainedBox(
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 5),
-                            child: HotStockCard(ticker: selectedImg[index]),
-                          ),
-                        );
-                      }),
-                ),
-              ],
+                  SizedBox(
+                    height: MediaQuery.of(context).size.width * 0.55 + 25,
+                    child: ListView.builder(
+                        itemCount: widget.cardNum,
+                        scrollDirection: Axis.horizontal,
+                        padding: const EdgeInsets.symmetric(horizontal: 5),
+                        itemBuilder: (BuildContext context, int index) {
+                          return UnconstrainedBox(
+                            child: Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 5),
+                              child: HotStockCard(ticker: selectedImg[index]),
+                            ),
+                          );
+                        }),
+                  ),
+                ],
+              ),
             );
           } else {
             return Container();

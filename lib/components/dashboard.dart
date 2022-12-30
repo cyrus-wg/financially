@@ -1,4 +1,5 @@
 import 'package:financially/components/hotStockRow.dart';
+import 'package:financially/components/nasdaqIndexCard.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatefulWidget {
@@ -12,7 +13,9 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      padding: const EdgeInsets.symmetric(vertical: 15),
       children: [
+        NasdaqIndexCard(),
         HotStockRow(cardNum: 1),
       ],
     );
