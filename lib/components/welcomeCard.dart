@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 
 class welcomeCard extends StatefulWidget {
   final String ticker;
-  late final Uint8List image;
   welcomeCard({super.key, required this.ticker});
 
   @override
@@ -14,6 +13,7 @@ class welcomeCard extends StatefulWidget {
 }
 
 class _welcomeCardState extends State<welcomeCard> {
+  late final Uint8List image;
   late bool marked;
   Future togglemark() async {
     await switchMarked(widget.ticker, marked);
@@ -31,7 +31,7 @@ class _welcomeCardState extends State<welcomeCard> {
           if (snapshot.hasData) {
             Map<String, dynamic> d = snapshot.data!;
             marked = d['marked'];
-            widget.image = d['image'];
+            image = d['image'];
             return Container(
               height: MediaQuery.of(context).size.width * 0.5,
               width: MediaQuery.of(context).size.width * 0.4,
@@ -43,9 +43,10 @@ class _welcomeCardState extends State<welcomeCard> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.2,
-                      width: MediaQuery.of(context).size.width * 0.2,
-                      child: Image.memory(widget.image)),
+                    height: MediaQuery.of(context).size.width * 0.2,
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Image.memory(image),
+                  ),
                   const SizedBox(height: 5),
                   Text(
                     widget.ticker,

@@ -14,7 +14,7 @@ class _DashboardState extends State<Dashboard> {
     return Container(
       child: ListView(
         children: [
-          HotStockRow(),
+          HotStockRow(cardNum: 1),
         ],
       ),
     );
