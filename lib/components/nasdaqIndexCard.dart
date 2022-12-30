@@ -58,10 +58,10 @@ class _NasdaqIndexCardState extends State<NasdaqIndexCard> {
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: value[0] == '+'
-                      ? Colors.green.withOpacity(0.4)
+                      ? Colors.green.withOpacity(0.9)
                       : value[0] == '-'
-                          ? Colors.red.withOpacity(0.4)
-                          : Colors.pink.shade50,
+                          ? Colors.red.withOpacity(0.9)
+                          : Colors.grey.withOpacity(0.9),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
