@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:auto_route/auto_route.dart';
@@ -75,7 +74,7 @@ class _HotStockCardState extends State<HotStockCard> {
                     ),
                     const SizedBox(height: 5),
                     Text(
-                      '$price',
+                      price,
                       style: TextStyle(
                         color: Colors.grey.shade800,
                         fontSize: 20,
@@ -89,7 +88,7 @@ class _HotStockCardState extends State<HotStockCard> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Container(
-                            padding: EdgeInsets.all(3),
+                            padding: const EdgeInsets.all(3),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               color: pert[0] == '+'
@@ -97,7 +96,7 @@ class _HotStockCardState extends State<HotStockCard> {
                                   : Colors.red.shade100,
                             ),
                             child: Text(
-                              '$pert',
+                              pert,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -108,7 +107,7 @@ class _HotStockCardState extends State<HotStockCard> {
                             ),
                           ),
                           Text(
-                            '$value',
+                            value,
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.grey.shade600,
@@ -133,7 +132,7 @@ class _HotStockCardState extends State<HotStockCard> {
               child: SizedBox(
                 height: MediaQuery.of(context).size.width * 0.55,
                 width: MediaQuery.of(context).size.width * 0.45,
-                child: CircularProgressIndicator(),
+                child: const CircularProgressIndicator(),
               ),
             );
           }

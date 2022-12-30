@@ -1,8 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:financially/components/dashboard.dart';
+import 'package:financially/components/portfolio.dart';
 import 'package:flutter/material.dart';
-
-import '../components/dashboard.dart';
-import '../components/portfolio.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});

@@ -117,7 +117,7 @@ class _AuthState extends State<Auth> {
   Future<void> handleOtp() async {
     await auth.verifyPhoneNumber(
       phoneNumber: '+852 ${_phone.text}',
-      timeout: Duration(minutes: 2),
+      timeout: const Duration(minutes: 2),
       verificationCompleted: (PhoneAuthCredential credential) async {
         await auth.signInWithCredential(credential);
         final o = widget.option == 'signup' ? 'signup' : 'signin';
@@ -293,7 +293,7 @@ class _AuthState extends State<Auth> {
                   : widget.option == 'signup'
                       ? widget.signup['confirm']
                       : widget.signin['confirm'],
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 25,
               ),
             ),
