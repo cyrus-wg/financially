@@ -9,7 +9,7 @@ Future<List<double>> getPriceTrend(String ticker, int duration) async {
     late String url;
     if (duration == 1) {
       url =
-          'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=$ticker&interval=5min&apikey=$alphavantage';
+          'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=$ticker&interval=5min&outputsize=full&apikey=$alphavantage';
     } else if (duration > 0 && duration < 100) {
       url =
           'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=$ticker&apikey=$alphavantage';

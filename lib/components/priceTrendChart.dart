@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 class PriceTrendChart extends StatefulWidget {
   final String ticker;
-  final int duration;
-  PriceTrendChart({super.key, required this.ticker, required this.duration});
+  int duration;
+  PriceTrendChart({super.key, required this.ticker, this.duration = 1});
 
   @override
   State<PriceTrendChart> createState() => _PriceTrendChartState();
@@ -63,40 +63,145 @@ class _PriceTrendChartState extends State<PriceTrendChart> {
                 return FlSpot(index.toDouble(), priceList[index]);
               });
 
-              return AspectRatio(
-                aspectRatio: 2,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                  child: LineChart(
-                    LineChartData(
-                      borderData: FlBorderData(
-                        border: const Border(
-                          bottom: BorderSide(),
-                          left: BorderSide(),
+              return Column(
+                children: [
+                  Container(
+                    height: 70,
+                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 20),
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        Card(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: widget.duration == 1
+                                  ? null
+                                  : Colors.transparent,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                widget.duration = 1;
+                              });
+                            },
+                            child: const Text(
+                              '1D',
+                            ),
+                          ),
                         ),
-                      ),
-                      titlesData: FlTitlesData(
-                        bottomTitles: AxisTitles(
-                            sideTitles: SideTitles(showTitles: false)),
-                        // leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                        topTitles: AxisTitles(
-                            sideTitles: SideTitles(showTitles: false)),
-                        rightTitles: AxisTitles(
-                            sideTitles: SideTitles(showTitles: false)),
-                      ),
-                      gridData: FlGridData(show: false),
-                      lineBarsData: [
-                        LineChartBarData(
-                          spots: trends,
-                          isCurved: false,
-                          dotData: FlDotData(
-                            show: false,
+                        Card(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: widget.duration == 30
+                                  ? null
+                                  : Colors.transparent,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                widget.duration = 30;
+                              });
+                            },
+                            child: const Text('30D'),
+                          ),
+                        ),
+                        Card(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: widget.duration == 90
+                                  ? null
+                                  : Colors.transparent,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                widget.duration = 90;
+                              });
+                            },
+                            child: const Text('3M'),
+                          ),
+                        ),
+                        Card(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: widget.duration == 180
+                                  ? null
+                                  : Colors.transparent,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                widget.duration = 180;
+                              });
+                            },
+                            child: const Text('6M'),
+                          ),
+                        ),
+                        Card(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: widget.duration == 360
+                                  ? null
+                                  : Colors.transparent,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                widget.duration = 360;
+                              });
+                            },
+                            child: const Text('1Y'),
+                          ),
+                        ),
+                        Card(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: widget.duration == 0
+                                  ? null
+                                  : Colors.transparent,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                widget.duration = 0;
+                              });
+                            },
+                            child: const Text('All'),
                           ),
                         ),
                       ],
                     ),
                   ),
-                ),
+                  AspectRatio(
+                    aspectRatio: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                      child: LineChart(
+                        LineChartData(
+                          borderData: FlBorderData(
+                            border: const Border(
+                              bottom: BorderSide(),
+                              left: BorderSide(),
+                            ),
+                          ),
+                          titlesData: FlTitlesData(
+                            bottomTitles: AxisTitles(
+                                sideTitles: SideTitles(showTitles: false)),
+                            // leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                            topTitles: AxisTitles(
+                                sideTitles: SideTitles(showTitles: false)),
+                            rightTitles: AxisTitles(
+                                sideTitles: SideTitles(showTitles: false)),
+                          ),
+                          gridData: FlGridData(show: false),
+                          lineBarsData: [
+                            LineChartBarData(
+                              spots: trends,
+                              isCurved: false,
+                              dotData: FlDotData(
+                                show: false,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               );
             }
           } else {
