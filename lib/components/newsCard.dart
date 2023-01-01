@@ -29,10 +29,14 @@ class NewsCard extends StatelessWidget {
                         width: 120,
                         height: 120,
                       )
-                    : Image.network(
-                        data['image'],
+                    : Image.network(data['image'],
                         width: 120,
-                      ),
+                        errorBuilder: (context, exception, stackTrace) =>
+                            Image.asset(
+                              'assets/NoImage.jpg',
+                              width: 120,
+                              height: 120,
+                            )),
               ),
               const SizedBox(width: 10),
               Expanded(
