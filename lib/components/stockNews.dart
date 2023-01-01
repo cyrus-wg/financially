@@ -27,6 +27,9 @@ class _StockNewsState extends State<StockNews> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final news = snapshot.data;
+          if (news!.isEmpty) {
+            return Container();
+          }
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
             child: Column(

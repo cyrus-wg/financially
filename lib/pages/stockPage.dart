@@ -14,7 +14,6 @@ class StockPage extends StatefulWidget {
 }
 
 class _StockPageState extends State<StockPage> {
-  late Future<bool> _future;
   late bool mark;
 
   Future togglemark() async {
@@ -22,7 +21,6 @@ class _StockPageState extends State<StockPage> {
     setState(() {
       mark = mark;
     });
-    print(mark);
   }
 
   @override
