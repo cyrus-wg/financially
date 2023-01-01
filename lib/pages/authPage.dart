@@ -53,7 +53,11 @@ class _AuthPageState extends State<AuthPage> {
               ),
             ],
           ),
-          Auth(option: widget.currentPage),
+          ListView(
+            children: [
+              Auth(option: widget.currentPage),
+            ],
+          ),
         ],
       ),
       drawer: Drawer(
