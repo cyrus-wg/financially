@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:financially/router/router.gr.dart';
 import 'package:financially/utils/showSnackBar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -235,7 +234,6 @@ class _AuthState extends State<Auth> {
                           keyboardType: TextInputType.number,
                           obscureText: true,
                           controller: _pin,
-                          // onCompleted: (_) => print(_pin.text),
                         ),
                 ],
               ),
@@ -256,14 +254,11 @@ class _AuthState extends State<Auth> {
           TextButton(
             onPressed: () async {
               if (widget.otp == false) {
-                String next = widget.option == 'signup' ? 'signin' : 'signup';
-                context.router.popUntil((_) => false);
-                context.router.push(AuthRoute(currentPage: next));
-                // setState(() {
-                //   widget.option =
-                //       widget.option == 'signup' ? 'signin' : 'signup';
-                //   _phone.text = '';
-                // });
+                setState(() {
+                  widget.option =
+                      widget.option == 'signup' ? 'signin' : 'signup';
+                  _phone.text = '';
+                });
               } else {
                 await handleOtp();
               }
