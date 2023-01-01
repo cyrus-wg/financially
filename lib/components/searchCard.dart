@@ -46,7 +46,7 @@ class _SearchCardState extends State<SearchCard> {
           child: InkWell(
             splashColor: Colors.pinkAccent,
             onTap: () async {
-              context.router.pushNamed('/stock/${widget.ticker}');
+              await context.router.pushNamed('/stock/${widget.ticker}');
               setState(() {});
             },
             child: Center(

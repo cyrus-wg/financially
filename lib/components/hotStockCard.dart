@@ -17,23 +17,11 @@ class _HotStockCardState extends State<HotStockCard> {
   late String price;
   late String pert;
   late String value;
-  late Future<Map<String, dynamic>> _future;
-
-  @override
-  void initState() {
-    _future = getHotCard(widget.ticker);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: _future,
+        future: getHotCard(widget.ticker),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final data = snapshot.data;
