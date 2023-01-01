@@ -215,6 +215,11 @@ class _AuthState extends State<Auth> {
                           textAlign: TextAlign.center,
                           maxLength: 8,
                           controller: _phone,
+                          onChanged: (value) {
+                            if (value.length == 8) {
+                              FocusManager.instance.primaryFocus?.unfocus();
+                            }
+                          },
                           style: const TextStyle(
                             color: Colors.black,
                             fontSize: 20,

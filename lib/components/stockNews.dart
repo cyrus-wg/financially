@@ -48,7 +48,7 @@ class _StockNewsState extends State<StockNews> {
                   shrinkWrap: true,
                   physics: const ClampingScrollPhysics(),
                   children: List.generate(
-                      widget.num, (index) => NewsCard(data: news![index])),
+                      widget.num, (index) => NewsCard(data: news[index])),
                 ),
                 const SizedBox(height: 10),
                 Center(

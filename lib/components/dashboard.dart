@@ -14,7 +14,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.symmetric(vertical: 15),
-      children: [
+      children: const [
         NasdaqIndexCard(),
         HotStockRow(cardNum: 1),
       ],

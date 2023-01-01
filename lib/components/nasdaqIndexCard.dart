@@ -98,7 +98,7 @@ class _NasdaqIndexCardState extends State<NasdaqIndexCard> {
                                 color: Colors.white70,
                               ),
                             ),
-                            SizedBox(width: 20),
+                            const SizedBox(width: 20),
                             Text(
                               value,
                               style: const TextStyle(

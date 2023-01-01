@@ -11,7 +11,7 @@ class Portfolio extends StatelessWidget {
           onPressed: () async {
             await FirebaseAuth.instance.signOut();
             context.router.popUntil((_) => false);
-            context.router.pushNamed('auth');
+            context.router.pushNamed('/auth');
           },
           child: Text('logout')),
     );

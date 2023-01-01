@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 class StockPage extends StatefulWidget {
   final String ticker;
-  StockPage({super.key, @PathParam('ticker') required this.ticker});
+  const StockPage({super.key, @PathParam('ticker') required this.ticker});
 
   @override
   State<StockPage> createState() => _StockPageState();
