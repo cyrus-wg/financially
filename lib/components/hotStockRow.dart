@@ -25,16 +25,24 @@ class _HotStockRowState extends State<HotStockRow> {
     }
   }
 
+  late Future<List<String>> _future;
+
+  @override
+  void initState() {
+    _future = getAllImgName();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: getAllImgName(),
+        future: _future,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             imgList = snapshot.data!;
             resetSelectedImg();
             return Container(
-              padding: EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 10),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,

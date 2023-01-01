@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:financially/router/router.gr.dart';
 import 'package:financially/utils/getHotCard.dart';
 import 'package:flutter/material.dart';
 

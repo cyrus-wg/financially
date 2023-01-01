@@ -1,5 +1,6 @@
 import 'package:financially/pages/authPage.dart';
 import 'package:financially/pages/mainPage.dart';
+import 'package:financially/pages/newsPage.dart';
 import 'package:financially/pages/searchPage.dart';
 import 'package:financially/pages/stockPage.dart';
 import 'package:financially/pages/welcomePage.dart';
@@ -14,6 +15,7 @@ import 'package:auto_route/auto_route.dart';
     AutoRoute(page: SearchPage, path: '/search'),
     AutoRoute(page: WelcomePage, path: '/welcome'),
     AutoRoute(page: StockPage, path: '/stock/:ticker'),
+    AutoRoute(page: NewsPage, path: '/news/:ticker'),
   ],
 )
 class $AppRouter {}

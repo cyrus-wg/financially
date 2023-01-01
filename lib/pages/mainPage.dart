@@ -26,7 +26,7 @@ class _MainPageState extends State<MainPage> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              Icon(Icons.account_balance_rounded),
+              Icon(Icons.trending_up_rounded),
               SizedBox(width: 10),
               Text(
                 'Financially',
