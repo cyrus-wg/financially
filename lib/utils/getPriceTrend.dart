@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:financially/utils/apiKeys.dart';
+import 'package:financially/apiKeys.dart';
 
 Future<List<double>> getPriceTrend(String ticker, int duration) async {
   try {

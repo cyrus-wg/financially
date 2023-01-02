@@ -1,3 +1,4 @@
+import 'package:financially/components/loading.dart';
 import 'package:financially/utils/getPriceTrend.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -211,7 +212,7 @@ class _PriceTrendChartState extends State<PriceTrendChart> {
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width * 0.2,
                   height: MediaQuery.of(context).size.width * 0.2,
-                  child: const CircularProgressIndicator(),
+                  child: const Loading(),
                 ),
               ),
             );

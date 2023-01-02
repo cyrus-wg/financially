@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:financially/components/loading.dart';
 import 'package:financially/components/newsCard.dart';
 import 'package:financially/utils/getNews.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +47,7 @@ class _NewsPageState extends State<NewsPage> {
                 child: SizedBox(
                   height: 50,
                   width: 50,
-                  child: CircularProgressIndicator(),
+                  child: Loading(),
                 ),
               ),
             ),

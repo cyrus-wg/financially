@@ -1,18 +1,17 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class Portfolio extends StatelessWidget {
+class Portfolio extends StatefulWidget {
+  const Portfolio({super.key});
+
+  @override
+  State<Portfolio> createState() => _PortfolioState();
+}
+
+class _PortfolioState extends State<Portfolio> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: ElevatedButton(
-          onPressed: () async {
-            await FirebaseAuth.instance.signOut();
-            context.router.popUntil((_) => false);
-            context.router.pushNamed('/auth');
-          },
-          child: Text('logout')),
+      child: Text('portfoio'),
     );
   }
 }

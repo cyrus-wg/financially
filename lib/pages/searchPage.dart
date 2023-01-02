@@ -1,8 +1,8 @@
 import 'package:algolia_helper_flutter/algolia_helper_flutter.dart';
 import 'package:financially/components/searchCard.dart';
-import 'package:financially/models/stock.dart';
-import 'package:financially/utils/hitPage.dart';
-import 'package:financially/utils/searchMetadata.dart';
+import 'package:financially/models/AssetInfo.dart';
+import 'package:financially/models/HitPage.dart';
+import 'package:financially/models/SearchMetadata.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -20,7 +20,7 @@ class _SearchPageState extends State<SearchPage> {
       indexName: 'stocks');
 
   final _searchTextController = TextEditingController();
-  final PagingController<int, Stock> _pagingController =
+  final PagingController<int, AssetInfo> _pagingController =
       PagingController(firstPageKey: 0);
 
   Stream<SearchMetadata> get _searchMetadata =>
@@ -84,39 +84,44 @@ class _SearchPageState extends State<SearchPage> {
             ),
           ),
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              StreamBuilder<SearchMetadata>(
-                stream: _searchMetadata,
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return const SizedBox.shrink();
-                  }
-                  return Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Text('${snapshot.data!.nbHits} results'),
-                  );
-                },
-              ),
-              Expanded(child: _hits(context)),
-            ],
+        body: Container(
+          decoration: BoxDecoration(color: Colors.pink.shade100),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                StreamBuilder<SearchMetadata>(
+                  stream: _searchMetadata,
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return const SizedBox.shrink();
+                    }
+                    return Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Text('${snapshot.data!.nbHits} results'),
+                    );
+                  },
+                ),
+                Expanded(child: _hits(context)),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  Widget _hits(BuildContext context) => PagedListView<int, Stock>(
+  Widget _hits(BuildContext context) => PagedListView<int, AssetInfo>(
       pagingController: _pagingController,
-      builderDelegate: PagedChildBuilderDelegate<Stock>(
+      builderDelegate: PagedChildBuilderDelegate<AssetInfo>(
           noItemsFoundIndicatorBuilder: (_) => const Center(
                 child: Text('No results found'),
               ),
           itemBuilder: (_, item, __) => Container(
-                height: 100,
+                height: 130,
                 padding: const EdgeInsets.all(4),
-                child: SearchCard(name: item.name, ticker: item.ticker),
+                child: SearchCard(
+                  cardinfo: item,
+                ),
               )));
 }

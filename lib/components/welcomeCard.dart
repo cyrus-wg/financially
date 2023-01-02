@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:financially/utils/getWelcomeInfo.dart';
-import 'package:financially/utils/marked.dart';
+import 'package:financially/utils/watchlist.dart';
 import 'package:flutter/material.dart';
 
 class welcomeCard extends StatefulWidget {
@@ -13,10 +13,10 @@ class welcomeCard extends StatefulWidget {
 }
 
 class _welcomeCardState extends State<welcomeCard> {
-  late final Uint8List image;
+  late Uint8List image;
   late bool marked;
   Future togglemark() async {
-    await switchMarked(widget.ticker, marked);
+    await switchWatched(widget.ticker);
     setState(() {
       marked = !marked;
     });

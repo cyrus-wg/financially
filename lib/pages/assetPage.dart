@@ -1,23 +1,23 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:financially/components/assetNews.dart';
 import 'package:financially/components/priceTrendChart.dart';
 import 'package:financially/components/stockHeader.dart';
-import 'package:financially/components/stockNews.dart';
-import 'package:financially/utils/marked.dart';
+import 'package:financially/utils/watchlist.dart';
 import 'package:flutter/material.dart';
 
-class StockPage extends StatefulWidget {
+class AssetPage extends StatefulWidget {
   final String ticker;
-  const StockPage({super.key, @PathParam('ticker') required this.ticker});
+  const AssetPage({super.key, @PathParam('ticker') required this.ticker});
 
   @override
-  State<StockPage> createState() => _StockPageState();
+  State<AssetPage> createState() => _AssetPageState();
 }
 
-class _StockPageState extends State<StockPage> {
+class _AssetPageState extends State<AssetPage> {
   late bool mark;
 
   Future togglemark() async {
-    await switchMarked(widget.ticker, mark);
+    await switchWatched(widget.ticker);
     setState(() {
       mark = mark;
     });
@@ -26,7 +26,7 @@ class _StockPageState extends State<StockPage> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: marked(widget.ticker),
+      future: getWatched(widget.ticker),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           mark = snapshot.data!;
@@ -61,7 +61,7 @@ class _StockPageState extends State<StockPage> {
                 children: [
                   StockHeader(ticker: widget.ticker),
                   PriceTrendChart(ticker: widget.ticker),
-                  StockNews(ticker: widget.ticker),
+                  AssetNews(ticker: widget.ticker),
                 ],
               ),
             ),

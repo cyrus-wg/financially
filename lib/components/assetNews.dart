@@ -1,18 +1,19 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:financially/components/loading.dart';
 import 'package:financially/components/newsCard.dart';
 import 'package:financially/utils/getNews.dart';
 import 'package:flutter/material.dart';
 
-class StockNews extends StatefulWidget {
+class AssetNews extends StatefulWidget {
   final String ticker;
   final int num;
-  const StockNews({super.key, required this.ticker, this.num = 5});
+  const AssetNews({super.key, required this.ticker, this.num = 5});
 
   @override
-  State<StockNews> createState() => _StockNewsState();
+  State<AssetNews> createState() => _AssetNewsState();
 }
 
-class _StockNewsState extends State<StockNews> {
+class _AssetNewsState extends State<AssetNews> {
   late Future<List<dynamic>> _future;
   @override
   void initState() {
@@ -79,7 +80,7 @@ class _StockNewsState extends State<StockNews> {
               child: SizedBox(
                 height: 50,
                 width: 50,
-                child: CircularProgressIndicator(),
+                child: Loading(),
               ),
             ),
           );

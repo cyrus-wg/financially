@@ -16,7 +16,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
   final _appRouter = AppRouter();
-  final user = FirebaseAuth.instance.currentUser;
+  // final user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     // print(user);
@@ -24,10 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.pink,
       ),
-      routerDelegate: _appRouter.delegate(initialRoutes: [
-        if (user == null) AuthRoute(),
-        if (user != null) MainRoute(),
-      ]),
+      routerDelegate: _appRouter.delegate(),
       routeInformationParser: _appRouter.defaultRouteParser(),
       debugShowCheckedModeBanner: false,
     );

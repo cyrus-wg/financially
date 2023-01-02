@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:financially/components/showSnackBar.dart';
 import 'package:financially/components/welcomeCard.dart';
 import 'package:financially/utils/getAllImgName.dart';
-import 'package:financially/utils/showSnackBar.dart';
 import 'package:flutter/material.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -34,7 +34,7 @@ class _WelcomePageState extends State<WelcomePage> {
             ),
             tooltip: 'close',
             onPressed: () {
-              context.router.replaceNamed('/');
+              context.router.replaceNamed('/home');
               ScaffoldMessenger.of(context)
                   .showSnackBar(showSnackBar('Welcome to Financially!'));
             },
@@ -95,6 +95,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         ],
                       ),
                     ),
+                    const SizedBox(height: 10),
                     GridView(
                       shrinkWrap: true,
                       physics: const ClampingScrollPhysics(),
@@ -128,7 +129,7 @@ class _WelcomePageState extends State<WelcomePage> {
           }),
       floatingActionButton: ElevatedButton(
         onPressed: () {
-          context.router.replaceNamed('/');
+          context.router.replaceNamed('/home');
           ScaffoldMessenger.of(context)
               .showSnackBar(showSnackBar('Welcome to Financially!'));
         },

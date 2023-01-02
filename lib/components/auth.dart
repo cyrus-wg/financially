@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:financially/utils/showSnackBar.dart';
+import 'package:financially/components/showSnackBar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
@@ -99,7 +99,7 @@ class _AuthState extends State<Auth> {
             .showSnackBar(showSnackBar('Sign up successfully'));
       } else {
         context.router.popUntil((_) => false);
-        context.router.pushNamed('/');
+        context.router.pushNamed('/home');
         ScaffoldMessenger.of(context)
             .showSnackBar(showSnackBar('Sign in successfully'));
       }
@@ -127,7 +127,7 @@ class _AuthState extends State<Auth> {
           ScaffoldMessenger.of(context)
               .showSnackBar(showSnackBar('Sign up successfully'));
         } else {
-          context.router.replaceNamed('/');
+          context.router.replaceNamed('/home');
           ScaffoldMessenger.of(context)
               .showSnackBar(showSnackBar('Sign in successfully'));
         }

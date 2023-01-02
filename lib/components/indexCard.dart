@@ -1,21 +1,24 @@
+import 'package:financially/components/loading.dart';
 import 'package:financially/utils/getLatestPriceInfo.dart';
 import 'package:flutter/material.dart';
 
-class NasdaqIndexCard extends StatefulWidget {
-  const NasdaqIndexCard({super.key});
+class IndexCard extends StatefulWidget {
+  final String ticker;
+  final String name;
+  const IndexCard({super.key, required this.name, required this.ticker});
 
   @override
-  State<NasdaqIndexCard> createState() => _NasdaqIndexCardState();
+  State<IndexCard> createState() => _IndexCardState();
 }
 
-class _NasdaqIndexCardState extends State<NasdaqIndexCard> {
+class _IndexCardState extends State<IndexCard> {
   late String price;
   late String pert;
   late String value;
   late Future<Map<String, dynamic>> _future;
   @override
   void initState() {
-    _future = getLatestPriceInfo('IXIC');
+    _future = getLatestPriceInfo(widget.ticker);
     super.initState();
   }
 
@@ -67,10 +70,10 @@ class _NasdaqIndexCardState extends State<NasdaqIndexCard> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      'NASDAQ',
-                      style: TextStyle(
-                        fontSize: 35,
+                    Text(
+                      widget.name,
+                      style: const TextStyle(
+                        fontSize: 32,
                         fontWeight: FontWeight.w900,
                         color: Colors.white,
                       ),
@@ -81,7 +84,7 @@ class _NasdaqIndexCardState extends State<NasdaqIndexCard> {
                         Text(
                           price,
                           style: const TextStyle(
-                            fontSize: 30,
+                            fontSize: 28,
                             fontWeight: FontWeight.w700,
                             color: Colors.white70,
                           ),
@@ -93,12 +96,12 @@ class _NasdaqIndexCardState extends State<NasdaqIndexCard> {
                             Text(
                               pert,
                               style: const TextStyle(
-                                fontSize: 20,
+                                fontSize: 18,
                                 fontWeight: FontWeight.w700,
                                 color: Colors.white70,
                               ),
                             ),
-                            const SizedBox(width: 20),
+                            const SizedBox(width: 18),
                             Text(
                               value,
                               style: const TextStyle(
@@ -116,18 +119,15 @@ class _NasdaqIndexCardState extends State<NasdaqIndexCard> {
               ),
             );
           } else {
-            return Container(
-              height: MediaQuery.of(context).size.width * 0.35,
-              decoration: BoxDecoration(
-                color: Colors.pink.shade50,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Center(
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.2,
-                  width: MediaQuery.of(context).size.width * 0.2,
-                  child: const CircularProgressIndicator(),
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              child: Container(
+                height: MediaQuery.of(context).size.width * 0.35,
+                decoration: BoxDecoration(
+                  color: Colors.pink.shade50,
+                  borderRadius: BorderRadius.circular(10),
                 ),
+                child: const Loading(),
               ),
             );
           }

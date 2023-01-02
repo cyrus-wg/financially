@@ -49,7 +49,7 @@ class _HotStockCardState extends State<HotStockCard> {
 
             return InkWell(
               onTap: () {
-                context.router.pushNamed('/stock/${widget.ticker}');
+                context.router.pushNamed('/asset/${widget.ticker}');
               },
               child: Container(
                 height: MediaQuery.of(context).size.width * 0.55,

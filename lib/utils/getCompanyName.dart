@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:financially/utils/apiKeys.dart';
+import 'package:financially/apiKeys.dart';
 
 Future<String> getCompanyName(String ticker) async {
   try {

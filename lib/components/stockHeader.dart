@@ -1,3 +1,4 @@
+import 'package:financially/components/loading.dart';
 import 'package:financially/utils/getStockInfo.dart';
 import 'package:flutter/material.dart';
 
@@ -116,7 +117,7 @@ class _StockHeaderState extends State<StockHeader> {
             return const SizedBox(
               height: 150,
               child: Center(
-                child: CircularProgressIndicator(),
+                child: Loading(),
               ),
             );
           }
