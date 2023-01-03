@@ -7,7 +7,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:uni_links/uni_links.dart';
 
 bool _initialURILinkHandled = false;
@@ -33,13 +32,6 @@ class _RootPageState extends State<RootPage> {
   Future<void> _initURIHandler() async {
     if (!_initialURILinkHandled) {
       _initialURILinkHandled = true;
-      Fluttertoast.showToast(
-          msg: "Invoked _initURIHandler",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.green,
-          textColor: Colors.white);
       try {
         final initialURI = await getInitialUri();
         if (initialURI != null) {
@@ -75,12 +67,6 @@ class _RootPageState extends State<RootPage> {
         setState(() {
           _currentURI = uri;
           _err = null;
-
-          // WidgetsBinding.instance.addPersistentFrameCallback(
-          //   (_) {
-          //     context.router.pushNamed('/asset/AAPL');
-          //   },
-          // );
         });
       }, onError: (Object err) {
         if (!mounted) {
@@ -141,11 +127,11 @@ class _RootPageState extends State<RootPage> {
     } else {
       if (t != '' && coolStart) {
         // context.router.pop();
-        context.router.navigateNamed('/asset/$t');
+        context.router.pushNamed('/asset/$t');
       } else if (t != '' && popup) {
         context.router.pushNamed('/asset/$t');
       }
-      return HomePage();
+      return const HomePage();
     }
   }
 }

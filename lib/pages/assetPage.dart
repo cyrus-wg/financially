@@ -6,6 +6,7 @@ import 'package:financially/pages/searchPage.dart';
 import 'package:financially/utils/getStockEntry.dart';
 import 'package:financially/utils/watchlist.dart';
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 
 class AssetPage extends StatefulWidget {
   final String ticker;
@@ -55,7 +56,10 @@ class _AssetPageState extends State<AssetPage> {
                     icon: const Icon(
                       Icons.share_rounded,
                     ),
-                    onPressed: () async {},
+                    onPressed: () async {
+                      await Share.share(
+                          'From Fiancially!: \n$name \nfinancially://unilinks.com/asset/${widget.ticker}');
+                    },
                   ),
                 ],
               ),
