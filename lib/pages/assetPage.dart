@@ -58,7 +58,7 @@ class _AssetPageState extends State<AssetPage> {
                     ),
                     onPressed: () async {
                       await Share.share(
-                          'From Fiancially!: \n$name \nfinancially://unilinks.com/asset/${widget.ticker}');
+                          'From Financially: \n$name \nfinancially://unilinks.com/asset/${widget.ticker}');
                     },
                   ),
                 ],
