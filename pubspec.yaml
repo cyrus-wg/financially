@@ -21,6 +21,8 @@ dependencies:
   auto_route: ^5.0.4
   fl_chart: ^0.55.2
   url_launcher: ^6.1.7
+  uni_links: ^0.5.1
+  fluttertoast: ^8.1.2
 
 dev_dependencies:
   flutter_test:

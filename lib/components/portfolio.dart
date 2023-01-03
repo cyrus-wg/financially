@@ -21,7 +21,6 @@ class _PortfolioState extends State<Portfolio> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final list = snapshot.data!;
-          // print(list);
           if (list.isEmpty) {
             return ListView(
               children: [
@@ -70,7 +69,6 @@ class _PortfolioState extends State<Portfolio> {
                 'pert': pert
               });
             }
-            print(watchlist);
             return ListView(
               children: [
                 HeaderCard(),
