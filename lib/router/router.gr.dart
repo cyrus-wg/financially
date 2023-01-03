@@ -83,14 +83,12 @@ class AppRouter extends _i9.RootStackRouter {
       );
     },
     NewsRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<NewsRouteArgs>(
-          orElse: () => NewsRouteArgs(ticker: pathParams.getString('ticker')));
+      final args = routeData.argsAs<NewsRouteArgs>();
       return _i9.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i8.NewsPage(
           key: args.key,
-          ticker: args.ticker,
+          news: args.news,
         ),
       );
     },
@@ -128,7 +126,7 @@ class AppRouter extends _i9.RootStackRouter {
         ),
         _i9.RouteConfig(
           NewsRoute.name,
-          path: '/news/:ticker',
+          path: '/news',
         ),
       ];
 }
@@ -267,15 +265,14 @@ class AssetRouteArgs {
 class NewsRoute extends _i9.PageRouteInfo<NewsRouteArgs> {
   NewsRoute({
     _i10.Key? key,
-    required String ticker,
+    required Map<String, dynamic> news,
   }) : super(
           NewsRoute.name,
-          path: '/news/:ticker',
+          path: '/news',
           args: NewsRouteArgs(
             key: key,
-            ticker: ticker,
+            news: news,
           ),
-          rawPathParams: {'ticker': ticker},
         );
 
   static const String name = 'NewsRoute';
@@ -284,15 +281,15 @@ class NewsRoute extends _i9.PageRouteInfo<NewsRouteArgs> {
 class NewsRouteArgs {
   const NewsRouteArgs({
     this.key,
-    required this.ticker,
+    required this.news,
   });
 
   final _i10.Key? key;
 
-  final String ticker;
+  final Map<String, dynamic> news;
 
   @override
   String toString() {
-    return 'NewsRouteArgs{key: $key, ticker: $ticker}';
+    return 'NewsRouteArgs{key: $key, news: $news}';
   }
 }

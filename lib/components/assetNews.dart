@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:financially/components/loading.dart';
 import 'package:financially/components/newsCard.dart';
+import 'package:financially/router/router.gr.dart';
 import 'package:financially/utils/getNews.dart';
 import 'package:flutter/material.dart';
 
@@ -55,7 +56,8 @@ class _AssetNewsState extends State<AssetNews> {
                 Center(
                   child: ElevatedButton(
                     onPressed: () async {
-                      await context.router.pushNamed('/news/${widget.ticker}');
+                      await context.router.push(NewsRoute(
+                          news: {'ticker': widget.ticker, 'news': news}));
                     },
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(250, 50),
