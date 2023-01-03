@@ -23,6 +23,7 @@ dependencies:
   url_launcher: ^6.1.7
   uni_links: ^0.5.1
   share_plus: ^6.3.0
+  flutter_native_splash: ^2.2.16
 
 dev_dependencies:
   flutter_test:
@@ -36,4 +37,6 @@ flutter:
   assets:
     - assets/
 
-
+flutter_native_splash:
+  image: assets/icon.png
+  color: '#FFDBE5'

@@ -94,8 +94,9 @@ class _AssetPageState extends State<AssetPage> {
             return const SearchPage();
           }
         } else {
-          return Scaffold(
-            body: Center(
+          return Container(
+            color: Colors.pink.shade100,
+            child: Center(
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.3,
                 height: MediaQuery.of(context).size.width * 0.3,

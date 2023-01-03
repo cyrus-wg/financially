@@ -80,6 +80,7 @@ class _HotStockRowState extends State<HotStockRow> {
                   SizedBox(
                     height: MediaQuery.of(context).size.width * 0.55 + 25,
                     child: ListView.builder(
+                        cacheExtent: 1500,
                         itemCount: widget.cardNum,
                         scrollDirection: Axis.horizontal,
                         padding: const EdgeInsets.symmetric(horizontal: 5),

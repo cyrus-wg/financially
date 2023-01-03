@@ -18,7 +18,7 @@ class _DashboardState extends State<Dashboard> {
         IndexCard(name: 'NASDAQ', ticker: 'ixic'),
         IndexCard(name: 'DJI', ticker: 'dji'),
         IndexCard(name: 'S&P 500', ticker: 'gspc'),
-        HotStockRow(cardNum: 1),
+        HotStockRow(cardNum: 5),
       ],
     );
   }

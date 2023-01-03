@@ -15,10 +15,17 @@ class AssetNews extends StatefulWidget {
 }
 
 class _AssetNewsState extends State<AssetNews> {
+  late Future<List<dynamic>> _future;
+  @override
+  void initState() {
+    _future = getNews(widget.ticker);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: getNews(widget.ticker),
+      future: _future,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final news = snapshot.data;
