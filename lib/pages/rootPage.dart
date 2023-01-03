@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:financially/pages/authPage.dart';
 import 'package:financially/pages/homePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,12 +19,14 @@ class RootPage extends StatefulWidget {
   State<RootPage> createState() => _RootPageState();
 }
 
-// accept deep link financially://unilinks.com/*
+// accept deep link financially://unilinks.com/asset/*
 class _RootPageState extends State<RootPage> {
   final user = FirebaseAuth.instance.currentUser;
   Uri? _initialURI;
   Uri? _currentURI;
   Object? _err;
+  String ticker = '';
+  final regex = RegExp(r'^/asset/\w+');
 
   StreamSubscription? _streamSubscription;
 
@@ -53,7 +56,6 @@ class _RootPageState extends State<RootPage> {
       } on PlatformException {
         debugPrint("Failed to receive initial uri");
       } on FormatException catch (err) {
-        // 6
         if (!mounted) {
           return;
         }
@@ -73,6 +75,12 @@ class _RootPageState extends State<RootPage> {
         setState(() {
           _currentURI = uri;
           _err = null;
+
+          // WidgetsBinding.instance.addPersistentFrameCallback(
+          //   (_) {
+          //     context.router.pushNamed('/asset/AAPL');
+          //   },
+          // );
         });
       }, onError: (Object err) {
         if (!mounted) {
@@ -106,14 +114,37 @@ class _RootPageState extends State<RootPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(_initialURI.toString());
-    print(_currentURI?.host);
-    print(_currentURI?.scheme);
-    print(_currentURI.toString());
-    print(_currentURI?.path);
+    bool coolStart =
+        _initialURI.toString() != 'null' && _currentURI.toString() == 'null';
+    bool popup = _currentURI.toString() != 'null';
+    if (coolStart) {
+      final path = _initialURI?.path;
+      if (path != null) {
+        if (regex.hasMatch(path)) {
+          ticker = path.substring(7);
+        }
+      }
+    } else if (popup) {
+      final path = _currentURI?.path;
+      if (path != null) {
+        if (regex.hasMatch(path)) {
+          ticker = path.substring(7);
+        }
+      }
+    }
+
+    String t = ticker.toUpperCase();
+    ticker = '';
+
     if (user == null) {
       return AuthPage();
     } else {
+      if (t != '' && coolStart) {
+        // context.router.pop();
+        context.router.navigateNamed('/asset/$t');
+      } else if (t != '' && popup) {
+        context.router.pushNamed('/asset/$t');
+      }
       return HomePage();
     }
   }

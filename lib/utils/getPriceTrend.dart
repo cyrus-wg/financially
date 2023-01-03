@@ -12,10 +12,10 @@ Future<List<double>> getPriceTrend(String ticker, int duration) async {
           'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=$ticker&interval=5min&outputsize=full&apikey=$alphavantage';
     } else if (duration > 0 && duration < 100) {
       url =
-          'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=$ticker&apikey=$alphavantage';
+          'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=$ticker&apikey=$alphavantage';
     } else {
       url =
-          'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=$ticker&outputsize=full&apikey=$alphavantage';
+          'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=$ticker&outputsize=full&apikey=$alphavantage';
     }
 
     HttpClient httpClient = HttpClient();

@@ -1,5 +1,5 @@
 import 'package:financially/components/loading.dart';
-import 'package:financially/utils/getStockInfo.dart';
+import 'package:financially/utils/getLatestPriceInfo.dart';
 import 'package:flutter/material.dart';
 
 class StockHeader extends StatefulWidget {
@@ -15,10 +15,9 @@ class _StockHeaderState extends State<StockHeader> {
   late String price;
   late String pert;
   late String value;
-  late String name;
   @override
   void initState() {
-    _future = getStockInfo(widget.ticker);
+    _future = getLatestPriceInfo(widget.ticker);
     super.initState();
   }
 
@@ -29,8 +28,7 @@ class _StockHeaderState extends State<StockHeader> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final data = snapshot.data;
-            name = data!['name'];
-            price = double.parse(data['price']).toStringAsFixed(3);
+            price = double.parse(data!['price']).toStringAsFixed(3);
             double pertd = double.parse(
                 double.parse(data['percent_change']).toStringAsFixed(2));
             double valued =
@@ -51,64 +49,48 @@ class _StockHeaderState extends State<StockHeader> {
               value = '-\$${'$valued'.substring(1)}';
             }
             return Container(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
                 children: [
                   Text(
-                    name,
-                    // textAlign: TextAlign.start,
-                    style: const TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.w900,
-                      color: Colors.white70,
+                    price,
+                    style: TextStyle(
+                      color: Colors.grey.shade800,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
-                  const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Text(
-                        price,
-                        style: TextStyle(
-                          color: Colors.grey.shade800,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                        ),
+                  Container(
+                    padding: const EdgeInsets.all(3),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: pert[0] == '+'
+                          ? Colors.green.shade100
+                          : pert[0] == '-'
+                              ? Colors.red.shade100
+                              : null,
+                    ),
+                    child: Text(
+                      pert,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: pert[0] == '+'
+                            ? Colors.green.shade600
+                            : pert[0] == '-'
+                                ? Colors.red.shade600
+                                : Colors.grey.shade600,
                       ),
-                      const SizedBox(width: 10),
-                      Container(
-                        padding: const EdgeInsets.all(3),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: pert[0] == '+'
-                              ? Colors.green.shade100
-                              : pert[0] == '-'
-                                  ? Colors.red.shade100
-                                  : null,
-                        ),
-                        child: Text(
-                          pert,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: pert[0] == '+'
-                                ? Colors.green.shade600
-                                : pert[0] == '-'
-                                    ? Colors.red.shade600
-                                    : Colors.grey.shade600,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Text(
-                        value,
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey.shade600,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    value,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey.shade600,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ],
               ),

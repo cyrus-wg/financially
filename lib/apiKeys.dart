@@ -12,4 +12,7 @@ const rapidapi = [
   'b8de0361b9mshec21896d445af44p15c0bcjsnb2e5beb04a68',
   'aec0fbef07msh613eba7dc53a333p1e89bbjsne58747247aab',
   '2e4cf60e43msh6b48675ffda8792p1ff32fjsn3f55e6c23fa4',
+  'bc4f977173mshe356ba28bad997ep145322jsnafc70d7ec4a7',
+  'ef639e2181msh158abdd0fb91cb7p1beaacjsn5f1a5f700680',
+  '47676503cdmshbe77c78cbe1cd71p133f03jsna70f3ffb22bb',
 ];

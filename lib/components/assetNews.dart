@@ -6,26 +6,19 @@ import 'package:financially/utils/getNews.dart';
 import 'package:flutter/material.dart';
 
 class AssetNews extends StatefulWidget {
-  final String ticker;
-  final int num;
-  const AssetNews({super.key, required this.ticker, this.num = 5});
+  late String ticker;
+  late int num;
+  AssetNews({super.key, required this.ticker, this.num = 5});
 
   @override
   State<AssetNews> createState() => _AssetNewsState();
 }
 
 class _AssetNewsState extends State<AssetNews> {
-  late Future<List<dynamic>> _future;
-  @override
-  void initState() {
-    _future = getNews(widget.ticker);
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _future,
+      future: getNews(widget.ticker),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final news = snapshot.data;
