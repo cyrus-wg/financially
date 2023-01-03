@@ -45,7 +45,9 @@ class _HomePageState extends State<HomePage> {
               ),
               onPressed: () async {
                 await context.router.pushNamed('/search');
-                setState(() {});
+                setState(() {
+                  _selectedIndex = 0;
+                });
               },
             )
           ]),
