@@ -6,7 +6,7 @@ import 'package:financially/apiKeys.dart';
 Future<List<dynamic>> getNews(String ticker) async {
   try {
     String url =
-        'https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=$ticker&limit=200&apikey=alph$alphavantage';
+        'https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=$ticker&limit=200&apikey=$alphavantage';
     HttpClient httpClient = HttpClient();
     HttpClientRequest request = await httpClient.getUrl(Uri.parse(url));
     HttpClientResponse response = await request.close();
