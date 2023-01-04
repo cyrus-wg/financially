@@ -26,7 +26,7 @@ Future<List<dynamic>> getNews(String ticker) async {
       list.add({
         'title': news['title'],
         'url': news['url'],
-        'image': news['banner_image'],
+        'image': news['banner_image'] ?? '',
         'source': news['source'],
         'datetime': rDT,
       });

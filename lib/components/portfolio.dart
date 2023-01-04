@@ -109,9 +109,7 @@ class _PortfolioState extends State<Portfolio> {
                                       await switchWatched(
                                           watchlist[index]['ticker']);
                                       setState(() {
-                                        watchlist.removeWhere((element) =>
-                                            element['ticker'] ==
-                                            watchlist[index]['ticker']);
+                                        watchlist.removeAt(index);
                                       });
                                     },
                                   ),
