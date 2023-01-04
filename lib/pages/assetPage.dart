@@ -84,6 +84,26 @@ class _AssetPageState extends State<AssetPage> {
                     ),
                     StockHeader(ticker: widget.ticker),
                     PriceTrendChart(ticker: widget.ticker),
+                    const SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          await context.router
+                              .pushNamed('/history/${widget.ticker}');
+                        },
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(100, 50),
+                        ),
+                        child: const Text(
+                          'View Historical Data',
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
                     AssetNews(ticker: widget.ticker),
                   ],
                 ),

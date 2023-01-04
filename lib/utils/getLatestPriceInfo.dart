@@ -11,7 +11,7 @@ Future<Map<String, dynamic>> getLatestPriceInfo(String ticker) async {
     while (true) {
       String key = rapidapi[Random().nextInt(rapidapi.length)];
       HttpClientRequest request = await httpClient.getUrl(Uri.parse(
-          "https://twelve-data1.p.rapidapi.com/quote?interval=1min&symbol=$ticker&format=json&outputsize=30"));
+          "https://twelve-data1.p.rapidapi.com/quote?interval=1day&symbol=$ticker&format=json&outputsize=30"));
       request.headers.add('X-RapidAPI-Key', key);
       request.headers.add('X-RapidAPI-Host', 'twelve-data1.p.rapidapi.com');
       HttpClientResponse response = await request.close();

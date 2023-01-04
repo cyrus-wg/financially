@@ -31,8 +31,12 @@ Future<List<double>> getPriceTrend(String ticker, int duration) async {
     Map<String, dynamic> data = predata[key];
     List<String> keys = data.keys.toList();
     List<double> prices = [];
-    final int len =
-        duration < keys.length || duration == 1 ? keys.length : duration;
+    late int len;
+    if (duration == 1 || duration == 0 || duration >= keys.length) {
+      len = keys.length;
+    } else {
+      len = duration;
+    }
     for (int i = 0; i < len; i++) {
       prices.add(double.parse(data[keys[i]]['4. close']));
     }

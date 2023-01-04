@@ -48,48 +48,78 @@ class _StockHeaderState extends State<StockHeader> {
             } else {
               value = '-\$${'$valued'.substring(1)}';
             }
+            String daylow = double.parse(data['low']).toStringAsFixed(3);
+            String dayhigh = double.parse(data['high']).toStringAsFixed(3);
+            String yearlow =
+                double.parse(data['fifty_two_week']['low']).toStringAsFixed(3);
+            String yearhigh =
+                double.parse(data['fifty_two_week']['high']).toStringAsFixed(3);
             return Container(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Row(
+                    children: [
+                      Text(
+                        price,
+                        style: TextStyle(
+                          color: Colors.grey.shade800,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      const SizedBox(width: 15),
+                      Container(
+                        padding: const EdgeInsets.all(3),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: pert[0] == '+'
+                              ? Colors.green.shade100
+                              : pert[0] == '-'
+                                  ? Colors.red.shade100
+                                  : null,
+                        ),
+                        child: Text(
+                          pert,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                            color: pert[0] == '+'
+                                ? Colors.green.shade600
+                                : pert[0] == '-'
+                                    ? Colors.red.shade600
+                                    : Colors.grey.shade600,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 15),
+                      Text(
+                        value,
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.grey.shade600,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
                   Text(
-                    price,
+                    '1-day: \$$daylow - \$$dayhigh',
                     style: TextStyle(
-                      color: Colors.grey.shade800,
-                      fontSize: 20,
+                      fontSize: 16,
+                      color: Colors.grey.shade700,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.all(3),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: pert[0] == '+'
-                          ? Colors.green.shade100
-                          : pert[0] == '-'
-                              ? Colors.red.shade100
-                              : null,
-                    ),
-                    child: Text(
-                      pert,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: pert[0] == '+'
-                            ? Colors.green.shade600
-                            : pert[0] == '-'
-                                ? Colors.red.shade600
-                                : Colors.grey.shade600,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
+                  const SizedBox(height: 10),
                   Text(
-                    value,
+                    '52-week: \$$yearlow - \$$yearhigh',
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.grey.shade600,
-                      fontWeight: FontWeight.w600,
+                      color: Colors.grey.shade700,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ],
