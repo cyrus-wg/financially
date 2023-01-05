@@ -1,6 +1,6 @@
-// import 'package:auto_route/auto_route.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:financially/components/auth.dart';
-// import 'package:financially/router/router.gr.dart';
+import 'package:financially/router/router.gr.dart';
 import 'package:flutter/material.dart';
 
 class AuthPage extends StatefulWidget {
@@ -59,17 +59,17 @@ class _AuthPageState extends State<AuthPage> {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           elevation: 0,
-          // leading: Builder(
-          //   builder: (BuildContext context) {
-          //     return IconButton(
-          //       onPressed: () {
-          //         Scaffold.of(context).openDrawer();
-          //       },
-          //       icon: const Icon(Icons.menu_rounded),
-          //       tooltip: 'Menu',
-          //     );
-          //   },
-          // ),
+          leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+                icon: const Icon(Icons.menu_rounded),
+                tooltip: 'Menu',
+              );
+            },
+          ),
           actions: [
             IconButton(
               onPressed: () async {
@@ -107,67 +107,67 @@ class _AuthPageState extends State<AuthPage> {
             ),
           ],
         ),
-        // drawer: Drawer(
-        //     width: 270,
-        //     child: ListView(
-        //       padding: EdgeInsets.zero,
-        //       children: [
-        //         const SizedBox(
-        //           height: 140,
-        //           child: DrawerHeader(
-        //             decoration: BoxDecoration(
-        //               color: Colors.pink,
-        //             ),
-        //             child: Center(
-        //               child: Text(
-        //                 'Financially!',
-        //                 style: TextStyle(
-        //                   color: Colors.white,
-        //                   fontSize: 36,
-        //                   fontWeight: FontWeight.bold,
-        //                 ),
-        //               ),
-        //             ),
-        //           ),
-        //         ),
-        //         ListTile(
-        //           title: const Center(
-        //               child: Text(
-        //             'Sign Up',
-        //             style: TextStyle(
-        //               color: Colors.pink,
-        //               fontSize: 25,
-        //             ),
-        //           )),
-        //           onTap: () {
-        //             // setState(() {
-        //             //   widget.currentPage = 'signup';
-        //             // });
-        //             context.router.popUntil((_) => false);
-        //             context.router.push(AuthRoute(currentPage: 'signup'));
-        //           },
-        //         ),
-        //         const Divider(),
-        //         ListTile(
-        //           title: const Center(
-        //               child: Text(
-        //             'Sign In',
-        //             style: TextStyle(
-        //               color: Colors.pink,
-        //               fontSize: 25,
-        //             ),
-        //           )),
-        //           onTap: () {
-        //             // setState(() {
-        //             //   widget.currentPage = 'signin';
-        //             // });
-        //             context.router.popUntil((_) => false);
-        //             context.router.push(AuthRoute(currentPage: 'signin'));
-        //           },
-        //         ),
-        //         const Divider(),
-        //       ],
-        //     )),
+        drawer: Drawer(
+            width: 270,
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                const SizedBox(
+                  height: 140,
+                  child: DrawerHeader(
+                    decoration: BoxDecoration(
+                      color: Colors.pink,
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Financially!',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 36,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                ListTile(
+                  title: const Center(
+                      child: Text(
+                    'Sign Up',
+                    style: TextStyle(
+                      color: Colors.pink,
+                      fontSize: 25,
+                    ),
+                  )),
+                  onTap: () {
+                    // setState(() {
+                    //   widget.currentPage = 'signup';
+                    // });
+                    context.router.popUntil((_) => false);
+                    context.router.push(AuthRoute(currentPage: 'signup'));
+                  },
+                ),
+                const Divider(),
+                ListTile(
+                  title: const Center(
+                      child: Text(
+                    'Sign In',
+                    style: TextStyle(
+                      color: Colors.pink,
+                      fontSize: 25,
+                    ),
+                  )),
+                  onTap: () {
+                    // setState(() {
+                    //   widget.currentPage = 'signin';
+                    // });
+                    context.router.popUntil((_) => false);
+                    context.router.push(AuthRoute(currentPage: 'signin'));
+                  },
+                ),
+                const Divider(),
+              ],
+            )),
       ),
     );
   }

@@ -123,10 +123,11 @@ class _RootPageState extends State<RootPage> {
     ticker = '';
 
     if (user == null) {
+      context.router.pushNamed('/auth');
       return AuthPage();
     } else {
       if (t != '' && coolStart) {
-        // context.router.pop();
+        context.router.replaceNamed('/home');
         context.router.pushNamed('/asset/$t');
       } else if (t != '' && popup) {
         context.router.pushNamed('/asset/$t');

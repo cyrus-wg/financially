@@ -16,7 +16,7 @@ class _DashboardState extends State<Dashboard> {
       padding: const EdgeInsets.symmetric(vertical: 10),
       children: const [
         IndexCard(name: 'NASDAQ', ticker: 'ixic'),
-        IndexCard(name: 'DJI', ticker: 'dji'),
+        IndexCard(name: 'DJIA', ticker: 'dji'),
         IndexCard(name: 'S&P 500', ticker: 'gspc'),
         HotStockRow(cardNum: 5),
       ],
