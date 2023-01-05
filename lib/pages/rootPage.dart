@@ -123,7 +123,7 @@ class _RootPageState extends State<RootPage> {
     ticker = '';
 
     if (user == null) {
-      context.router.pushNamed('/auth');
+      context.router.replaceNamed('/auth');
       return AuthPage();
     } else {
       if (t != '' && coolStart) {
@@ -132,6 +132,7 @@ class _RootPageState extends State<RootPage> {
       } else if (t != '' && popup) {
         context.router.pushNamed('/asset/$t');
       }
+      context.router.replaceNamed('/');
       return const HomePage();
     }
   }

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:financially/components/hotStockCard.dart';
+import 'package:financially/components/loading.dart';
 import 'package:financially/utils/getAllImgName.dart';
 import 'package:flutter/material.dart';
 
@@ -98,7 +99,11 @@ class _HotStockRowState extends State<HotStockRow> {
               ),
             );
           } else {
-            return Container();
+            return SizedBox(
+                height: MediaQuery.of(context).size.width * 0.55 + 25,
+                child: const Center(
+                  child: Loading(),
+                ));
           }
         });
   }
