@@ -54,6 +54,6 @@ This step may take a little bit of time for first running.
       - NASDAQ
       - DJIA
       - S&P 500
-  - Portfoio
+  - Portfolio
     - Watchlist with real time price
     - Log out function
