@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:financially/components/loading.dart';
+import 'package:financially/components/showSnackBar.dart';
 import 'package:financially/models/AssetInfo.dart';
 import 'package:financially/utils/watchlist.dart';
 
@@ -101,6 +102,13 @@ class _SearchCardState extends State<SearchCard> {
                         ),
                         onPressed: () async {
                           await switchWatched(widget.cardinfo.ticker);
+                          if (!watched) {
+                            ScaffoldMessenger.of(context).showSnackBar(showSnackBar(
+                                'Added ${widget.cardinfo.ticker} to watchlist'));
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(showSnackBar(
+                                'Removed ${widget.cardinfo.ticker} from watchlist'));
+                          }
                           setState(
                             () {
                               watched = !watched;

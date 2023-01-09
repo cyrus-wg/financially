@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:financially/components/headerCard.dart';
 import 'package:financially/components/loading.dart';
+import 'package:financially/components/showSnackBar.dart';
 import 'package:financially/utils/getWatchedInfo.dart';
 import 'package:financially/utils/watchlist.dart';
 import 'package:flutter/material.dart';
@@ -111,6 +112,9 @@ class _PortfolioState extends State<Portfolio> {
                                       setState(() {
                                         watchlist.removeAt(index);
                                       });
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(showSnackBar(
+                                              'Removed ${watchlist[index]['ticker']} from watchlist'));
                                     },
                                   ),
                                   Column(

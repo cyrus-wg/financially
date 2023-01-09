@@ -11,5 +11,6 @@ SnackBar showSnackBar(String msg) {
       ),
     ),
     backgroundColor: Colors.pink,
+    duration: const Duration(seconds: 1),
   );
 }

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:financially/components/assetNews.dart';
 import 'package:financially/components/priceTrendChart.dart';
+import 'package:financially/components/showSnackBar.dart';
 import 'package:financially/components/stockHeader.dart';
 import 'package:financially/pages/searchPage.dart';
 import 'package:financially/utils/getStockEntry.dart';
@@ -22,6 +23,13 @@ class _AssetPageState extends State<AssetPage> {
 
   Future togglemark() async {
     await switchWatched(widget.ticker);
+    if (!mark) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(showSnackBar('Added ${widget.ticker} to watchlist'));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+          showSnackBar('Removed ${widget.ticker} from watchlist'));
+    }
     setState(() {
       mark = mark;
     });
