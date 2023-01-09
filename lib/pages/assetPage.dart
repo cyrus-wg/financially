@@ -23,6 +23,7 @@ class _AssetPageState extends State<AssetPage> {
 
   Future togglemark() async {
     await switchWatched(widget.ticker);
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
     if (!mark) {
       ScaffoldMessenger.of(context)
           .showSnackBar(showSnackBar('Added ${widget.ticker} to watchlist'));

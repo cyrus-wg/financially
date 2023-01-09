@@ -102,6 +102,7 @@ class _SearchCardState extends State<SearchCard> {
                         ),
                         onPressed: () async {
                           await switchWatched(widget.cardinfo.ticker);
+                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
                           if (!watched) {
                             ScaffoldMessenger.of(context).showSnackBar(showSnackBar(
                                 'Added ${widget.cardinfo.ticker} to watchlist'));

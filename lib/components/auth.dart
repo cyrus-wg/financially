@@ -54,6 +54,7 @@ class _AuthState extends State<Auth> {
   Future<void> signup() async {
     if (_phone.text.length < 8) {
       _phone.text = '';
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
           showSnackBar('Mobile number should consist of 8 digits'));
       return;
@@ -61,6 +62,7 @@ class _AuthState extends State<Auth> {
     final found = await findUser(_phone.text);
     if (found) {
       _phone.text = '';
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context)
           .showSnackBar(showSnackBar('User already registered'));
     } else {
@@ -71,6 +73,7 @@ class _AuthState extends State<Auth> {
   Future<void> signin() async {
     if (_phone.text.length < 8) {
       _phone.text = '';
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
           showSnackBar('Mobile number should consist of 8 digits'));
       return;
@@ -78,6 +81,7 @@ class _AuthState extends State<Auth> {
     final found = await findUser(_phone.text);
     if (!found) {
       _phone.text = '';
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context)
           .showSnackBar(showSnackBar('User not registered'));
     } else {
@@ -95,17 +99,20 @@ class _AuthState extends State<Auth> {
         await createWatchlist(_phone.text);
         context.router.popUntil((_) => false);
         context.router.pushNamed('/welcome');
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context)
             .showSnackBar(showSnackBar('Sign up successfully'));
       } else {
         context.router.popUntil((_) => false);
         context.router.pushNamed('/home');
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context)
             .showSnackBar(showSnackBar('Sign in successfully'));
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-verification-code') {
         _pin.text = '';
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context)
             .showSnackBar(showSnackBar('Invalid verification code'));
       }
@@ -124,10 +131,12 @@ class _AuthState extends State<Auth> {
         if (o == 'signup') {
           await createWatchlist(_phone.text);
           context.router.replaceNamed('/welcome');
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
           ScaffoldMessenger.of(context)
               .showSnackBar(showSnackBar('Sign up successfully'));
         } else {
           context.router.replaceNamed('/home');
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
           ScaffoldMessenger.of(context)
               .showSnackBar(showSnackBar('Sign in successfully'));
         }
@@ -140,6 +149,7 @@ class _AuthState extends State<Auth> {
           widget.otp = true;
         });
         _verificationId = verificationId;
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context)
             .showSnackBar(showSnackBar('Please input OTP!'));
       },

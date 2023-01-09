@@ -35,6 +35,7 @@ class _WelcomePageState extends State<WelcomePage> {
             tooltip: 'close',
             onPressed: () {
               context.router.replaceNamed('/home');
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
               ScaffoldMessenger.of(context)
                   .showSnackBar(showSnackBar('Welcome to Financially!'));
             },
@@ -130,6 +131,7 @@ class _WelcomePageState extends State<WelcomePage> {
       floatingActionButton: ElevatedButton(
         onPressed: () {
           context.router.replaceNamed('/home');
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
           ScaffoldMessenger.of(context)
               .showSnackBar(showSnackBar('Welcome to Financially!'));
         },
