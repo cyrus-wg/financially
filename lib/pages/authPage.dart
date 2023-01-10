@@ -27,17 +27,22 @@ class _AuthPageState extends State<AuthPage> {
                   height: 200,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: Colors.purpleAccent,
+                    color: Colors.pink.shade100.withOpacity(0.8),
                   ),
                   padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
-                  child: const Text(
-                    "Welcome to Financially!",
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.w800,
-                      color: Colors.white,
-                    ),
-                    textAlign: TextAlign.center,
+                  child: Column(
+                    children: const [
+                      SizedBox(height: 30),
+                      Text(
+                        "Welcome to Financially!",
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w800,
+                          color: Colors.white,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
                   ),
                 ),
                 Positioned(
