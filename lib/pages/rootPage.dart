@@ -132,7 +132,6 @@ class _RootPageState extends State<RootPage> {
       } else if (t != '' && popup) {
         context.router.pushNamed('/asset/$t');
       }
-      context.router.replaceNamed('/');
       return const HomePage();
     }
   }
