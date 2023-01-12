@@ -103,8 +103,7 @@ class _AuthState extends State<Auth> {
         ScaffoldMessenger.of(context)
             .showSnackBar(showSnackBar('Sign up successfully'));
       } else {
-        context.router.popUntil((_) => false);
-        context.router.pushNamed('/home');
+        context.router.replaceNamed('/');
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context)
             .showSnackBar(showSnackBar('Sign in successfully'));
@@ -135,7 +134,7 @@ class _AuthState extends State<Auth> {
           ScaffoldMessenger.of(context)
               .showSnackBar(showSnackBar('Sign up successfully'));
         } else {
-          context.router.replaceNamed('/home');
+          context.router.replaceNamed('/');
           ScaffoldMessenger.of(context).hideCurrentSnackBar();
           ScaffoldMessenger.of(context)
               .showSnackBar(showSnackBar('Sign in successfully'));
