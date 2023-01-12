@@ -127,7 +127,6 @@ class _RootPageState extends State<RootPage> {
       return AuthPage();
     } else {
       if (t != '' && coolStart) {
-        context.router.replaceNamed('/home');
         context.router.pushNamed('/asset/$t');
       } else if (t != '' && popup) {
         context.router.pushNamed('/asset/$t');
